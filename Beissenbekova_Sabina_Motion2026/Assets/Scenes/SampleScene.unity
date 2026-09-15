@@ -946,6 +946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pipeline
   isTheLeftMouseIsPressed: 0
+  isTheLeftMouseIsReleased: 0
 --- !u!4 &1413354828
 Transform:
   m_ObjectHideFlags: 0
