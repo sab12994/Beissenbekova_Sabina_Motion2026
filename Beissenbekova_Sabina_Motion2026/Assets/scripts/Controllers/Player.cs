@@ -20,4 +20,14 @@ public class Player : MonoBehaviour
     {
 
     }
+
+    public void WarpPlayer(Transform target)
+    {
+        //target = enemyTransform;
+        //Vector2 position = new Vector2 (transform.position.x, transform.position.y);
+
+        //Vector2 sizeOfVector = new Vector2(target, position); 
+
+        //check how to make Lerp
+    }
 }
