@@ -10,24 +10,44 @@ public class Player : MonoBehaviour
     public GameObject bombPrefab;
     public Transform bombsTransform;
 
+    public Vector3 bombOffSet;
+    public float inBombSpacing;
+    public int inNumberOfBombs;
+
     void Update()
     {
+        if (Keyboard.current.bKey.wasPressedThisFrame)
+        {
+            SpawnBombAtOffset(bombOffSet);
+        }
 
+        if (Keyboard.current.tKey.wasPressedThisFrame)
+        {
+            SpawnBombTrail(inBombSpacing, inNumberOfBombs);
+        }
     }
 
 
     public void SpawnBombAtOffset(Vector3 inOffset)
     {
-
+        Vector3 spawnPos = transform.position + inOffset;
+        Instantiate(bombPrefab, spawnPos, Quaternion.identity); 
     }
 
-    public void WarpPlayer(Transform target)
+    public void SpawnBombTrail(float inBombSpacing, int inNumberOfBombs)
     {
-        //target = enemyTransform;
-        //Vector2 position = new Vector2 (transform.position.x, transform.position.y);
+        Vector3 distance = transform.position - bombPrefab.transform.position;
+        
+        if (distance.magnitude > 3)
+        {
+            Vector3 theMiddle = distance.normalized * (distance.magnitude/2);
+            Instantiate(bombPrefab, theMiddle, Quaternion.identity);
 
-        //Vector2 sizeOfVector = new Vector2(target, position); 
-
-        //check how to make Lerp
+        }
     }
+
+    //public void WarpPlayer(Transform target)
+    //{
+        
+    //}
 }
