@@ -11,11 +11,14 @@ public class Player : MonoBehaviour
     public Transform bombsTransform;
 
     public Vector3 bombOffSet;
-    public float inBombSpacing;
-    public int inNumberOfBombs;
+    //public float inBombSpacing;
+    //public int inNumberOfBombs;
+
+    public float inDistance;
 
     void Update()
-    {
+    {             
+
         if (Keyboard.current.bKey.wasPressedThisFrame)
         {
             SpawnBombAtOffset(bombOffSet);
@@ -23,7 +26,7 @@ public class Player : MonoBehaviour
 
         if (Keyboard.current.tKey.wasPressedThisFrame)
         {
-            SpawnBombTrail(inBombSpacing, inNumberOfBombs);
+            SpawnBombTrail();
         }
     }
 
@@ -34,7 +37,7 @@ public class Player : MonoBehaviour
         Instantiate(bombPrefab, spawnPos, Quaternion.identity); 
     }
 
-    public void SpawnBombTrail(float inBombSpacing, int inNumberOfBombs)
+    public void SpawnBombTrail()
     {
         Vector3 distance = transform.position - bombPrefab.transform.position;
         
@@ -46,8 +49,35 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void SpawnBombOnRandomCorner(float inDistance)
+    {
+        float random = Random.Range(0, 4);
+        Vector3 spawnPos = transform.position * random;
+
+        if (random == 0)
+        {            
+            spawnPos = transform.position + new Vector3 (0, inDistance, 0);
+        }
+        if(random == 1)
+        {
+            spawnPos = transform.position - new Vector3(0, inDistance, 0);
+        }
+        if(random == 2)
+        {
+            spawnPos = transform.position + new Vector3(inDistance, 0, 0);
+        }
+        if(random == 3)
+        {
+            spawnPos = transform.position - new Vector3(inDistance, 0, 0);
+        }
+                      
+
+        Instantiate(bombPrefab, spawnPos, Quaternion.identity);
+
+    }
+
     //public void WarpPlayer(Transform target)
     //{
-        
+
     //}
 }
