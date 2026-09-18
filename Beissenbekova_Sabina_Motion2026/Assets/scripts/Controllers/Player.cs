@@ -16,8 +16,10 @@ public class Player : MonoBehaviour
 
     public float inDistance;
 
+    public float ratio;
+
     void Update()
-    {             
+    {
 
         if (Keyboard.current.bKey.wasPressedThisFrame)
         {
@@ -27,6 +29,11 @@ public class Player : MonoBehaviour
         if (Keyboard.current.tKey.wasPressedThisFrame)
         {
             SpawnBombTrail();
+        }
+
+        if (Keyboard.current.aKey.isPressed)
+        { 
+            WarpPlayer(enemyTransform, ratio);
         }
     }
 
@@ -76,8 +83,16 @@ public class Player : MonoBehaviour
 
     }
 
-    //public void WarpPlayer(Transform target)
-    //{
+    public void WarpPlayer(Transform target, float ratio)
+    {
+        ratio += Time.deltaTime;
+        
+        if(ratio > 0)
+        {
+            ratio = 0;
+        }
 
-    //}
+        transform.position = Vector2.Lerp(target.position, transform.position, ratio);
+    }
+
 }
