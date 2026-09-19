@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
 
     public float ratio;
 
+    float inMaxRange;
+
     void Update()
     {
 
@@ -31,10 +33,38 @@ public class Player : MonoBehaviour
             SpawnBombTrail();
         }
 
-        if (Keyboard.current.aKey.isPressed)
-        { 
-            WarpPlayer(enemyTransform, ratio);
+        //if (Keyboard.current.aKey.isPressed)
+        //{ 
+        //    WarpPlayer(enemyTransform, ratio);
+        //}
+
+        if (Mouse.current.leftButton.isPressed)
+        {
+            DetectAsteroids(inMaxRange, asteroidTransforms);
         }
+    }
+
+    public void DetectAsteroids(float inMaxRange, List<Transform> inAsteroids)
+    {
+        Vector2 playerPos = new Vector2(transform.position.x, transform.position.y);
+        Vector2 test = new Vector2(0,0);
+
+
+        for (int i = 0; i < inAsteroids.Count; i++)
+        {
+            Transform asteroidPos = inAsteroids[i];
+
+            Vector3 end = new Vector3(asteroidPos.position.x, asteroidPos.position.y);
+
+            Debug.DrawLine(playerPos, end, Color.green, 2.5f);
+
+        }
+
+
+        //float dis = Vector3.Distance(playerPos, inAsteroids.position);
+
+        //Debug.DrawLine(playerPos, test, Color.green, 2.5f);
+
     }
 
 
