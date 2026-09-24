@@ -28,8 +28,8 @@ public class Player : MonoBehaviour
 
     public float decelerationTime;
     float deceleration;
-    
 
+    
     void Start()
     {
         currentAcceleration = maxSpeed / accelerationTime; 
@@ -64,6 +64,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    
 
     public void PlayerMovement()
     {
@@ -104,14 +105,14 @@ public class Player : MonoBehaviour
         transform.position = transform.position + currentVelocity * Time.deltaTime;
 
 
-        //if(currentVelocity < 0.0001f) 
+        //if (currentVelocity = 0.00001f)
         //{
-        //    currentVelocity * 0f;
+        //    currentVelocity = currentVelocity * 0f;
         //}
-        
-    }
-    
 
+    }
+
+   
     public void DetectAsteroids(float inMaxRange, List<Transform> inAsteroids)
     {
         Vector2 playerPos = new Vector2(transform.position.x, transform.position.y);
