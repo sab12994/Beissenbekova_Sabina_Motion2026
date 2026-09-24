@@ -94,7 +94,21 @@ public class Player : MonoBehaviour
             currentVelocity = currentVelocity.normalized * maxSpeed;
         }
 
+
+        if(!Keyboard.current.aKey.isPressed && !Keyboard.current.wKey.isPressed && !Keyboard.current.sKey.isPressed && !Keyboard.current.dKey.isPressed)
+        {
+            currentVelocity -= currentVelocity.normalized * deceleration * Time.deltaTime;
+        }
+
+
         transform.position = transform.position + currentVelocity * Time.deltaTime;
+
+
+        //if(currentVelocity < 0.0001f) 
+        //{
+        //    currentVelocity * 0f;
+        //}
+        
     }
     
 
