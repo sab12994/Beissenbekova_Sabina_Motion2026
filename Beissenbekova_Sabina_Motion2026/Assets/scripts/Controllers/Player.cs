@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
             DetectAsteroids(inMaxRange, asteroidTransforms);
         }
     }
+        
 
     public void DetectAsteroids(float inMaxRange, List<Transform> inAsteroids)
     {
