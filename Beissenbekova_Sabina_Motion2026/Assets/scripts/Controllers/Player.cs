@@ -20,9 +20,29 @@ public class Player : MonoBehaviour
 
     float inMaxRange;
 
+    public Vector3 currentVelocity;
+
+    public float maxSpeed;
+    public float accelerationTime;
+    public float currentAcceleration;
+
+    public float decelerationTime;
+    float deceleration;
+
+    
+    void Start()
+    {
+        currentAcceleration = maxSpeed / accelerationTime; 
+        deceleration = maxSpeed / decelerationTime;
+    }
+
     void Update()
     {
 
+        PlayerMovement();
+
+
+        
         if (Keyboard.current.bKey.wasPressedThisFrame)
         {
             SpawnBombAtOffset(bombOffSet);
@@ -45,6 +65,55 @@ public class Player : MonoBehaviour
     }
         
 
+    
+
+    public void PlayerMovement()
+    {
+        //currentVelocity = Vector3.zero;
+        Vector3 accelerationDirection = Vector3.zero;
+
+        if (Keyboard.current.aKey.isPressed)
+        {
+            accelerationDirection += Vector3.left;
+        }
+        if (Keyboard.current.dKey.isPressed)
+        {
+            accelerationDirection += Vector3.right;
+        }
+        if (Keyboard.current.wKey.isPressed)
+        {
+            accelerationDirection += Vector3.up;
+        }
+        if (Keyboard.current.sKey.isPressed)
+        {
+            accelerationDirection += Vector3.down;
+        }
+
+        currentVelocity += accelerationDirection.normalized * currentAcceleration * Time.deltaTime;
+
+        if (currentVelocity.magnitude > maxSpeed)
+        {
+            currentVelocity = currentVelocity.normalized * maxSpeed;
+        }
+
+
+        if(!Keyboard.current.aKey.isPressed && !Keyboard.current.wKey.isPressed && !Keyboard.current.sKey.isPressed && !Keyboard.current.dKey.isPressed)
+        {
+            currentVelocity -= currentVelocity.normalized * deceleration * Time.deltaTime;
+        }
+
+
+        transform.position = transform.position + currentVelocity * Time.deltaTime;
+
+
+        //if (currentVelocity = 0.00001f)
+        //{
+        //    currentVelocity = currentVelocity * 0f;
+        //}
+
+    }
+
+   
     public void DetectAsteroids(float inMaxRange, List<Transform> inAsteroids)
     {
         Vector2 playerPos = new Vector2(transform.position.x, transform.position.y);
@@ -68,7 +137,7 @@ public class Player : MonoBehaviour
 
     }
 
-
+   
     public void SpawnBombAtOffset(Vector3 inOffset)
     {
         Vector3 spawnPos = transform.position + inOffset;

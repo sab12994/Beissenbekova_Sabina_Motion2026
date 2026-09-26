@@ -17,4 +17,26 @@ public class Asteroid : MonoBehaviour
     void Update()
     {
     }
+
+    //public void AsteroidMovement()
+    //{
+    //    Vector3 moveVelocity = new Vector3 moveVelocity.normalized * moveSpeed;
+
+
+    //    for (int i = 0; i < inAsteroids.Count; i++)
+    //    {
+            
+    //        Transform asteroidPos = inAsteroids[i];
+
+    //        //Vector3 end = new Vector3(asteroidPos.position.x, asteroidPos.position.y);
+
+    //        maxFloatDistance = Random.Range(asteroidPos.position.x - 5f, asteroidPos.position.y + 5f);           
+
+    //    }
+
+    //    transform.position = (asteroidPos.position * maxFloatDistance) + moveVelocity * Time.deltaTime;
+
+    //}
+
+
 }
