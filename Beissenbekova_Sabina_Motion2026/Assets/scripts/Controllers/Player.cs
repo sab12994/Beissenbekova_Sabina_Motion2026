@@ -35,10 +35,10 @@ public class Player : MonoBehaviour
     public float circleRadius;
     public Vector3 circleOffset;
 
-    public float shiftDuration;
-    public float shiftProgress = 0f;
+    //public float shiftDuration;
+    //public float shiftProgress = 0f;
 
-    List<Vector2> points;
+    //List<Vector2> points;
 
 
     void Start()
@@ -91,16 +91,55 @@ public class Player : MonoBehaviour
 
     public void PlayerRadar()
     {
+        float angle45 = 45f * Mathf.Deg2Rad;
+        float angle45X = Mathf.Cos(angle45);
+        float angle45Y = Mathf.Sin(angle45);
+        Vector2 angle45Point = new Vector2 (angle45X, angle45Y);
+
+        float angle135 = 135f * Mathf.Deg2Rad;
+        float angle135X = Mathf.Cos(angle135);
+        float angle135Y = Mathf.Sin(angle135);
+        Vector2 angle135Point = new Vector2(angle135X, angle135Y);
+
+        float angle225 = 225f * Mathf.Deg2Rad;
+        float angle225X = Mathf.Cos(angle225);
+        float angle225Y = Mathf.Sin(angle225);
+        Vector2 angle225Point = new Vector2(angle225X, angle225Y);
+
+        float angle315 = 315f * Mathf.Deg2Rad;
+        float angle315X = Mathf.Cos(angle315);
+        float angle315Y = Mathf.Sin(angle315);
+        Vector2 angle315Point = new Vector2(angle315X, angle315Y);
+
+
         Vector3 center = transform.position;
         Vector2 p1 = new Vector2(center.x + 1f, center.y);
         Vector2 p2 = new Vector2(center.x, center.y - 1f);
         Vector2 p3 = new Vector2(center.x - 1f, center.y);
         Vector2 p4 = new Vector2(center.x, center.y + 1f);
 
-        Debug.DrawLine(p1, p2, Color.green, 50f);
-        Debug.DrawLine(p2, p3, Color.green, 50f);
-        Debug.DrawLine(p3, p4, Color.green, 50f);
-        Debug.DrawLine(p4, p1, Color.green, 50f);
+        Color color = Color.green;
+
+        float distance = Vector3.Distance(center, enemyTransform.position);
+
+        if (distance <= 1f)
+        {
+            color = Color.red;
+        }
+
+        Debug.DrawLine(p1, angle315Point, color, 50f);
+        Debug.DrawLine(angle315Point, p2, color, 50f);
+        Debug.DrawLine(p2, angle225Point, color, 50f);
+        Debug.DrawLine(angle225Point, p3, color, 50f);
+        Debug.DrawLine(p3, angle135Point, color, 50f);
+        Debug.DrawLine(angle135Point, p4, color, 50f);
+        Debug.DrawLine(p4, angle45Point, color, 50f);
+        Debug.DrawLine(angle45Point, p1, color, 50f);
+
+        
+
+
+
 
         //for (int i = 0;  i < points.Count; i++)
         //{
