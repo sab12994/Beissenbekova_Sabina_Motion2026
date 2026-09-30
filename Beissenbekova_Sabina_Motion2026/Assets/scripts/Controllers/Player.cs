@@ -29,11 +29,33 @@ public class Player : MonoBehaviour
     public float decelerationTime;
     float deceleration;
 
-    
+    public List<float> degrees;
+    private int currentAngleIndex = 0;
+
+    public float circleRadius;
+    public Vector3 circleOffset;
+
+    public float shiftDuration;
+    public float shiftProgress = 0f;
+
+    List<Vector2> points;
+
+
     void Start()
     {
         currentAcceleration = maxSpeed / accelerationTime; 
         deceleration = maxSpeed / decelerationTime;
+
+
+        //float fortyFiveDegrees = 45f;
+        //float ffDInRadians = fortyFiveDegrees * Mathf.Deg2Rad;
+
+        //float twoPiRadians = 2 * Mathf.PI;
+        //float tprInDegrees = twoPiRadians * Mathf.Rad2Deg;
+
+        ////for these functions its better to use radians instead of degrees
+        //Mathf.Cos(fortyFiveDegrees * Mathf.Deg2Rad);
+        //Mathf.Sin(fortyFiveDegrees * Mathf.Deg2Rad);
     }
 
     void Update()
@@ -41,8 +63,10 @@ public class Player : MonoBehaviour
 
         PlayerMovement();
 
+        CircleExercise();
 
-        
+        PlayerRadar();
+       
         if (Keyboard.current.bKey.wasPressedThisFrame)
         {
             SpawnBombAtOffset(bombOffSet);
@@ -58,14 +82,81 @@ public class Player : MonoBehaviour
         //    WarpPlayer(enemyTransform, ratio);
         //}
 
-        if (Mouse.current.leftButton.isPressed)
-        {
-            DetectAsteroids(inMaxRange, asteroidTransforms);
-        }
+        //if (Mouse.current.leftButton.wasPressedThisFrame)
+        //{
+        //    DetectAsteroids(inMaxRange, asteroidTransforms);
+        //}
+    }
+
+
+    public void PlayerRadar()
+    {
+        Vector3 center = transform.position;
+        Vector2 p1 = new Vector2(center.x + 1f, center.y);
+        Vector2 p2 = new Vector2(center.x, center.y - 1f);
+        Vector2 p3 = new Vector2(center.x - 1f, center.y);
+        Vector2 p4 = new Vector2(center.x, center.y + 1f);
+
+        Debug.DrawLine(p1, p2, Color.green, 50f);
+        Debug.DrawLine(p2, p3, Color.green, 50f);
+        Debug.DrawLine(p3, p4, Color.green, 50f);
+        Debug.DrawLine(p4, p1, Color.green, 50f);
+
+        //for (int i = 0;  i < points.Count; i++)
+        //{
+
+        //}
+
+
     }
         
+    public void CircleExercise()
+    {
 
-    
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            currentAngleIndex++;
+
+            if (currentAngleIndex >= degrees.Count)
+            {
+                currentAngleIndex = 0;
+            }
+        }
+
+
+        float currentAngle = degrees[currentAngleIndex];
+        float currentAngleInRadians = currentAngle * Mathf.Deg2Rad;
+
+        Vector3 startPoint = Vector3.zero;
+        float endPointX = Mathf.Cos(currentAngleInRadians);
+        float endPointY = Mathf.Sin(currentAngleInRadians);
+        Vector3 endPoint = new Vector3(endPointX, endPointY) * circleRadius + circleOffset;
+
+        Debug.DrawLine(startPoint, endPoint, Color.wheat);
+
+
+
+        //Vector2 origin = Vector2.zero;
+
+
+        //for(int i = 0; i < degrees.Count;  i++)
+        //{
+        //    float x = 0;
+        //    degrees[i] = x + 30f;
+        //    degrees[i] = x;
+
+        //    Debug.Log("");
+
+        //    if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        //    {
+        //        degrees[i] = degrees[i + 1];
+        //        Debug.Log("");
+        //    }
+
+
+        //}
+    }
+
 
     public void PlayerMovement()
     {
