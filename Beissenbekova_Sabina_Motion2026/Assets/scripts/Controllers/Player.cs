@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
     }
 
 
-    public void PlayerRadar()
+    public void EnemyRadar()
     {
         float angle45 = 45f * Mathf.Deg2Rad;
         float angle45X = Mathf.Cos(angle45);
