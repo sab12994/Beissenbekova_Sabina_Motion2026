@@ -40,6 +40,10 @@ public class Player : MonoBehaviour
 
     //List<Vector2> points;
 
+    public float radius;
+    public int numberOfPowerups;
+    public GameObject powerups;
+
 
     void Start()
     {
@@ -60,13 +64,13 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-
         PlayerMovement();
 
         CircleExercise();
 
-        PlayerRadar();
-       
+        EnemyRadar();
+
+        
         if (Keyboard.current.bKey.wasPressedThisFrame)
         {
             SpawnBombAtOffset(bombOffSet);
@@ -88,6 +92,15 @@ public class Player : MonoBehaviour
         //}
     }
 
+    public void SpawnPowerups()
+    {
+        float angle = (360f /  numberOfPowerups) * Mathf.Deg2Rad;
+        float pointX = Mathf.Cos(angle) * radius;
+        float pointY = Mathf.Cos(angle) * radius;
+        Vector2 pointSpawnPos = new Vector2(pointX, pointY);
+
+        Instantiate(powerups, pointSpawnPos, Quaternion.identity);
+    }
 
     public void EnemyRadar()
     {
