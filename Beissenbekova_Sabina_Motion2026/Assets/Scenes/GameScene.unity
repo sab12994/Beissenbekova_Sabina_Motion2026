@@ -3405,7 +3405,8 @@ MonoBehaviour:
   - 315
   - 360
   radius: 2
-  speed: 0
+  speed: 1
+  shiftDuration: 5
 --- !u!212 &1677682743
 SpriteRenderer:
   serializedVersion: 2
