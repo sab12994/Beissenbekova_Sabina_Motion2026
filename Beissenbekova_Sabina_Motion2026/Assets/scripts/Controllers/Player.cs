@@ -149,11 +149,7 @@ public class Player : MonoBehaviour
         Debug.DrawLine(p4, angle45Point, color, 50f);
         Debug.DrawLine(angle45Point, p1, color, 50f);
 
-        
-
-
-
-
+       
         //for (int i = 0;  i < points.Count; i++)
         //{
 
