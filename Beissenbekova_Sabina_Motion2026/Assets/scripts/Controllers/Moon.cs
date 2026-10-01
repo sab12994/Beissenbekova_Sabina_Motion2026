@@ -12,7 +12,7 @@ public class Moon : MonoBehaviour
     public float speed;
 
     float shiftProgress;
-    public float shiftDuration = 0f;
+    float shiftDuration = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +39,8 @@ public class Moon : MonoBehaviour
         //    }
         //}
 
-        shiftProgress += Time.deltaTime;
+        shiftProgress += speed * Time.deltaTime;
+        
 
         if (shiftProgress > shiftDuration)
         {
