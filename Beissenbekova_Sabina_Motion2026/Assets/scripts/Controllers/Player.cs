@@ -246,10 +246,10 @@ public class Player : MonoBehaviour
         transform.position = transform.position + currentVelocity * Time.deltaTime;
 
 
-        //if (currentVelocity = 0.00001f)
-        //{
-        //    currentVelocity = currentVelocity * 0f;
-        //}
+        if (currentVelocity.magnitude < 0.00001f)
+        {
+            currentVelocity *= 0f;
+        }
 
     }
 

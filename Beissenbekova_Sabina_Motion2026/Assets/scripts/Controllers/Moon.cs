@@ -11,8 +11,8 @@ public class Moon : MonoBehaviour
     public float radius;
     public float speed;
 
-    float shiftProgress;
-    float shiftDuration = 0f;
+    float shiftProgress = 0f;
+    float shiftDuration = 5f;
 
     // Start is called before the first frame update
     void Start()
