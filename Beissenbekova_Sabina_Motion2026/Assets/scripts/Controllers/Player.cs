@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
     {
         float angle = (360f /  numberOfPowerups) * Mathf.Deg2Rad;
         float pointX = Mathf.Cos(angle) * radius;
-        float pointY = Mathf.Cos(angle) * radius;
+        float pointY = Mathf.Sin(angle) * radius;
         Vector2 pointSpawnPos = new Vector2(pointX, pointY);
 
         Instantiate(powerups, pointSpawnPos, Quaternion.identity);
@@ -104,28 +104,29 @@ public class Player : MonoBehaviour
 
     public void EnemyRadar()
     {
+        Vector3 center = transform.position;
+
         float angle45 = 45f * Mathf.Deg2Rad;
         float angle45X = Mathf.Cos(angle45);
         float angle45Y = Mathf.Sin(angle45);
-        Vector2 angle45Point = new Vector2 (angle45X, angle45Y);
+        Vector2 angle45Point = new Vector2 (center.x + angle45X, center.y + angle45Y);
 
         float angle135 = 135f * Mathf.Deg2Rad;
         float angle135X = Mathf.Cos(angle135);
         float angle135Y = Mathf.Sin(angle135);
-        Vector2 angle135Point = new Vector2(angle135X, angle135Y);
+        Vector2 angle135Point = new Vector2(center.x + angle135X, center.y + angle135Y);
 
         float angle225 = 225f * Mathf.Deg2Rad;
         float angle225X = Mathf.Cos(angle225);
         float angle225Y = Mathf.Sin(angle225);
-        Vector2 angle225Point = new Vector2(angle225X, angle225Y);
+        Vector2 angle225Point = new Vector2(center.x + angle225X, center.y + angle225Y);
 
         float angle315 = 315f * Mathf.Deg2Rad;
         float angle315X = Mathf.Cos(angle315);
         float angle315Y = Mathf.Sin(angle315);
-        Vector2 angle315Point = new Vector2(angle315X, angle315Y);
+        Vector2 angle315Point = new Vector2(center.x + angle315X, center.y + angle315Y);
 
-
-        Vector3 center = transform.position;
+                
         Vector2 p1 = new Vector2(center.x + 1f, center.y);
         Vector2 p2 = new Vector2(center.x, center.y - 1f);
         Vector2 p3 = new Vector2(center.x - 1f, center.y);
@@ -140,14 +141,14 @@ public class Player : MonoBehaviour
             color = Color.red;
         }
 
-        Debug.DrawLine(p1, angle315Point, color, 50f);
-        Debug.DrawLine(angle315Point, p2, color, 50f);
-        Debug.DrawLine(p2, angle225Point, color, 50f);
-        Debug.DrawLine(angle225Point, p3, color, 50f);
-        Debug.DrawLine(p3, angle135Point, color, 50f);
-        Debug.DrawLine(angle135Point, p4, color, 50f);
-        Debug.DrawLine(p4, angle45Point, color, 50f);
-        Debug.DrawLine(angle45Point, p1, color, 50f);
+        Debug.DrawLine(p1, angle315Point, color);
+        Debug.DrawLine(angle315Point, p2, color);
+        Debug.DrawLine(p2, angle225Point, color);
+        Debug.DrawLine(angle225Point, p3, color);
+        Debug.DrawLine(p3, angle135Point, color);
+        Debug.DrawLine(angle135Point, p4, color);
+        Debug.DrawLine(p4, angle45Point, color);
+        Debug.DrawLine(angle45Point, p1, color);
 
        
         //for (int i = 0;  i < points.Count; i++)
@@ -245,10 +246,10 @@ public class Player : MonoBehaviour
         transform.position = transform.position + currentVelocity * Time.deltaTime;
 
 
-        //if (currentVelocity = 0.00001f)
-        //{
-        //    currentVelocity = currentVelocity * 0f;
-        //}
+        if (currentVelocity.magnitude < 0.00001f)
+        {
+            currentVelocity *= 0f;
+        }
 
     }
 
