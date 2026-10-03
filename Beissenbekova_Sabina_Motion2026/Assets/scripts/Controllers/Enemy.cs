@@ -1,13 +1,16 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Enemy : MonoBehaviour
 {
     public Transform playerTransform;
-    public float speed = 1;
+    public float speed = 1;    
+    public GameObject enemysBomb;
     private void Update()
     {
         EnemyMovement();
+        BombSpawn();
     }
 
     public void EnemyMovement()
@@ -20,6 +23,14 @@ public class Enemy : MonoBehaviour
         
         //transform.position += transform.up;
 
+    }
+
+    public void BombSpawn()
+    {        
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            Instantiate(enemysBomb, transform.up, Quaternion.identity);
+        }
     }
 
 
