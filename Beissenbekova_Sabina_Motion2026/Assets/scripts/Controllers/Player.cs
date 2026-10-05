@@ -335,4 +335,18 @@ public class Player : MonoBehaviour
         transform.position = Vector2.Lerp(target.position, transform.position, ratio);
     }
 
+
+    //convert from a vector to an angle based around the x axis
+
+    public static float VectorToAngle(Vector3 inVector)
+    {
+        float angle = Mathf.Atan2(inVector.y, inVector.x) * Mathf.Rad2Deg;
+        return angle - 90f;
+    }
+
+    public static float VectorDot(Vector3 a, Vector3 b)
+    {
+        float dotProduct = a.x * b.x + a.y * b.y;
+        return dotProduct;
+    }
 }
