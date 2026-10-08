@@ -4,9 +4,11 @@ using UnityEngine.InputSystem;
 
 public class Enemy : MonoBehaviour
 {
-    public Transform playerTransform;
+    public Transform player;
     public float speed = 1;    
     public GameObject enemysBomb;
+    public Transform shieldSprite;
+
     private void Update()
     {
         EnemyMovement();
@@ -14,9 +16,8 @@ public class Enemy : MonoBehaviour
     }
 
     public void EnemyMovement()
-    {
-        Vector2 playerPos = playerTransform.position;
-        Vector2 direction = playerPos - (Vector2)transform.position;
+    {        
+        Vector3 direction = player.position - transform.position;
         transform.up = direction;
 
         transform.position += (Vector3)(direction * speed * Time.deltaTime);
@@ -29,7 +30,14 @@ public class Enemy : MonoBehaviour
     {        
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            Instantiate(enemysBomb, transform.up, Quaternion.identity);
+            Vector3 direction = player.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+
+            Quaternion rotation = Quaternion.Euler(0, 0, angle);
+
+            Instantiate(enemysBomb, transform.position, rotation);
+
+            enemysBomb.GetComponent<EnemyBombs>().shieldSprite = shieldSprite;
         }
     }
 

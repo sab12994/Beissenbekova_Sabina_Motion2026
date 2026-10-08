@@ -19,7 +19,7 @@ public class EnemyBombs : MonoBehaviour
     void Update()
     {        
         //Vector3 direction = (player.position - enemy.position).normalized;
-        transform.position += Vector3.up * speed * Time.deltaTime;
+        transform.position += transform.up * speed * Time.deltaTime;
 
         float distance = Vector3.Distance(shieldSprite.position, transform.position);
 
