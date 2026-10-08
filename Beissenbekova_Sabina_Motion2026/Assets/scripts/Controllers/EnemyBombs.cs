@@ -25,7 +25,7 @@ public class EnemyBombs : MonoBehaviour
 
         if (distance <= 0.9f)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 
