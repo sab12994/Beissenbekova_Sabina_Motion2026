@@ -7,7 +7,7 @@ public class EnemyBombs : MonoBehaviour
     public Transform player;
     public Transform enemy;
 
-    public Transform shieldSprite;
+    public Transform shieldSprite; 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

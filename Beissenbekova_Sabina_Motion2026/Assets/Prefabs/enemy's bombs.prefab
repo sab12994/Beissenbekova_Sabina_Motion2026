@@ -104,6 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72e3f6ea9f02f0745b7e7c0db6b5c1f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBombs
-  speed: 2
+  speed: 10
   player: {fileID: 4408196811525658, guid: abc125f00ae369940b2c5c0275186637, type: 3}
   enemy: {fileID: 4504276444959460, guid: e3900e4d87ee29c43ad1d9098b51432c, type: 3}
+  shieldSprite: {fileID: 0}

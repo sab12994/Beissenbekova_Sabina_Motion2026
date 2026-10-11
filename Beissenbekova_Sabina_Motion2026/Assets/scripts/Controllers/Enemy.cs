@@ -9,10 +9,21 @@ public class Enemy : MonoBehaviour
     public GameObject enemysBomb;
     public Transform shieldSprite;
 
+    public float timer = 0f;
+
     private void Update()
     {
         EnemyMovement();
-        BombSpawn();
+
+        timer += Time.deltaTime;
+
+        if (timer > 1f)
+        {            
+            timer = 0f;
+            BombSpawn();
+        }
+        
+                
     }
 
     public void EnemyMovement()
@@ -27,18 +38,15 @@ public class Enemy : MonoBehaviour
     }
 
     public void BombSpawn()
-    {        
-        if (Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            Vector3 direction = player.position - transform.position;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+    {               
+         Vector3 direction = player.position - transform.position;
+         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 
-            Quaternion rotation = Quaternion.Euler(0, 0, angle);
+         Quaternion rotation = Quaternion.Euler(0, 0, angle);
+         Instantiate(enemysBomb, transform.position, rotation);
 
-            Instantiate(enemysBomb, transform.position, rotation);
-
-            enemysBomb.GetComponent<EnemyBombs>().shieldSprite = shieldSprite;
-        }
+         enemysBomb.GetComponent<EnemyBombs>().shieldSprite = shieldSprite;
+        
     }
 
 
