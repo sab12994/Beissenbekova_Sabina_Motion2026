@@ -43,9 +43,9 @@ public class Enemy : MonoBehaviour
          float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 
          Quaternion rotation = Quaternion.Euler(0, 0, angle);
-         Instantiate(enemysBomb, transform.position, rotation);
+         GameObject clone = Instantiate(enemysBomb, transform.position, rotation);
 
-         enemysBomb.GetComponent<EnemyBombs>().shieldSprite = shieldSprite;
+         clone.GetComponent<EnemyBombs>().shieldSprite = shieldSprite;
         
     }
 

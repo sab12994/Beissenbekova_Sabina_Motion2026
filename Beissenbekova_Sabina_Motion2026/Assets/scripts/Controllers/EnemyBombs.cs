@@ -12,7 +12,7 @@ public class EnemyBombs : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        Destroy(gameObject, 3f);
     }
 
     // Update is called once per frame
@@ -27,6 +27,8 @@ public class EnemyBombs : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
+
     }
 
 
