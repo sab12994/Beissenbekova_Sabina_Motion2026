@@ -9,7 +9,9 @@ public class Enemy : MonoBehaviour
     public GameObject enemysBomb;
     public Transform shieldSprite;
 
-    public float timer = 0f;
+    float timer = 0f;
+
+    public float bombSpawnFrequency = 1f;
 
     private void Update()
     {
@@ -17,7 +19,7 @@ public class Enemy : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if (timer > 1f)
+        if (timer > bombSpawnFrequency)
         {            
             timer = 0f;
             BombSpawn();
