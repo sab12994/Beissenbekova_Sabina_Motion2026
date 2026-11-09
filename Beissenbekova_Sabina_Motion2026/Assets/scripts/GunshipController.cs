@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,15 +9,32 @@ public class GunshipController : MonoBehaviour
 
     public GameObject cannonballPrefab;
     public float cannonballForce = 150f;
+    
 
     void Update()
     {
         //Takes the mouse position in screen coordinates (pixels) and converts it to world coordinates
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        
+        mousePosition.z = 0;
+
         //These methods aim the cannons based on where the mouse is in the 2D space
         Vector3 leftDirection = AimCannon(mousePosition, leftCannon);
         Vector3 rightDirection = AimCannon(mousePosition, rightCannon);
+
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            GameObject lCB = Instantiate(cannonballPrefab, leftCannon.position, leftCannon.rotation);
+            Rigidbody2D rb = lCB.GetComponent<Rigidbody2D>();
+            rb.AddForce(leftDirection.normalized *  cannonballForce, ForceMode2D.Impulse);                        
+        }
+
+        if (Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            GameObject rCB = Instantiate(cannonballPrefab, rightCannon.position, rightCannon.rotation);
+            Rigidbody2D rb = rCB.GetComponent<Rigidbody2D>();
+            rb.AddForce(rightDirection.normalized * cannonballForce, ForceMode2D.Impulse);
+        }
+                
     }
 
     //Given a target position and the transform of a cannon, aims that cannon at that target
