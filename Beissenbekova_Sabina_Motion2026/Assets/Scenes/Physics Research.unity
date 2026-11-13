@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 115202255}
   - component: {fileID: 115202252}
   - component: {fileID: 115202254}
-  - component: {fileID: 115202253}
   m_Layer: 0
   m_Name: test rat
   m_TagString: Untagged
@@ -166,23 +165,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &115202253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 115202251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49e68ed5064825242be54b8b1128afa9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ForcesTest
-  rb: {fileID: 115202252}
-  rb2: {fileID: 1294487967}
-  rb3: {fileID: 556469469}
-  forceStrength: 0
-  ignore: 1
 --- !u!61 &115202254
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -297,7 +279,7 @@ Transform:
   m_GameObject: {fileID: 115202251}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.53, y: 2.01, z: 0}
+  m_LocalPosition: {x: -6.49, y: 0.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -315,7 +297,6 @@ GameObject:
   - component: {fileID: 556469470}
   - component: {fileID: 556469469}
   - component: {fileID: 556469468}
-  - component: {fileID: 556469472}
   m_Layer: 0
   m_Name: test rat for ignore collision
   m_TagString: Untagged
@@ -464,19 +445,36 @@ Transform:
   m_GameObject: {fileID: 556469467}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.19, y: 0.33, z: 0}
+  m_LocalPosition: {x: 3.19, y: 0.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &556469472
+--- !u!1 &759263288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 759263290}
+  - component: {fileID: 759263289}
+  m_Layer: 0
+  m_Name: script
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &759263289
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 556469467}
+  m_GameObject: {fileID: 759263288}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49e68ed5064825242be54b8b1128afa9, type: 3}
@@ -485,8 +483,24 @@ MonoBehaviour:
   rb: {fileID: 115202252}
   rb2: {fileID: 1294487967}
   rb3: {fileID: 556469469}
-  forceStrength: 0
+  rat1: {fileID: 115202256}
+  rat2: {fileID: 556469471}
   ignore: 0
+--- !u!4 &759263290
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759263288}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.78985, y: -0.39493, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1294487965
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,7 +513,6 @@ GameObject:
   - component: {fileID: 1294487968}
   - component: {fileID: 1294487967}
   - component: {fileID: 1294487966}
-  - component: {fileID: 1294487970}
   m_Layer: 0
   m_Name: test rat for rotation
   m_TagString: Untagged
@@ -654,23 +667,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1294487970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1294487965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49e68ed5064825242be54b8b1128afa9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ForcesTest
-  rb: {fileID: 115202252}
-  rb2: {fileID: 1294487967}
-  rb3: {fileID: 556469469}
-  forceStrength: 0
-  ignore: 0
 --- !u!1 &1517382138
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,6 +809,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1517382141}
-  - {fileID: 1294487969}
   - {fileID: 115202256}
+  - {fileID: 1294487969}
   - {fileID: 556469471}
+  - {fileID: 759263290}
