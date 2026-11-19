@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,10 @@ public class PlayerController : MonoBehaviour
     public float accelerationTIme;
     float acceleration;
 
+    public SpriteRenderer player;
+    public bool isgrounded;
+    public LayerMask layerMask;
+
     public enum FacingDirection
     {
         left, right
@@ -19,6 +24,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         acceleration = maxSpeed / accelerationTIme;
+        isgrounded = false;
     }
 
     // Update is called once per frame
@@ -33,6 +39,9 @@ public class PlayerController : MonoBehaviour
         if (Keyboard.current.aKey.isPressed)
         {
             playerInput.x -= 1f;
+            //player.flipX = false;
+
+
         }
         if (Keyboard.current.dKey.isPressed)
         {
@@ -40,6 +49,24 @@ public class PlayerController : MonoBehaviour
         }
 
         MovementUpdate(playerInput);
+
+
+        //if (GetFacingDirection() == FacingDirection.left)
+        //{
+        //    player.flipX = true;
+        //}
+        //if (GetFacingDirection() == FacingDirection.right)
+        //{
+        //    player.flipX = false;
+        //}
+
+        
+        if (Physics.Raycast(player.transform.position, - player.transform.up, 1f, layerMask) == false)
+        {
+            IsGrounded();
+            isgrounded = true;
+        }
+        
     }
 
     private void MovementUpdate(Vector2 playerInput)
@@ -55,6 +82,9 @@ public class PlayerController : MonoBehaviour
             //?
         }
         rb.linearVelocity = newVelocity;
+
+
+
     }
 
     public bool IsWalking()
@@ -68,6 +98,23 @@ public class PlayerController : MonoBehaviour
 
     public FacingDirection GetFacingDirection()
     {
-        return FacingDirection.left;
+        if (rb.linearVelocity.x < 0f)
+        {
+            return FacingDirection.left;
+        } 
+        if (rb.linearVelocity.x > 0f)
+        {
+            return FacingDirection.right;
+        }
+
+        if (player.flipX == true)
+        {
+            return FacingDirection.left;
+        } 
+        else
+        {
+            return FacingDirection.right;
+        }        
+
     }
 }
