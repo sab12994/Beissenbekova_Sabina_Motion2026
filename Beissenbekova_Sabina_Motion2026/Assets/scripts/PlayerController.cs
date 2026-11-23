@@ -15,6 +15,13 @@ public class PlayerController : MonoBehaviour
     public bool isgrounded;
     public LayerMask layerMask;
 
+    public float friction;
+
+    float gravity;
+    public float apexHeight;
+    public float apexTIme;
+    float initialJumpVelocity;
+
     public enum FacingDirection
     {
         left, right
@@ -25,6 +32,10 @@ public class PlayerController : MonoBehaviour
     {
         acceleration = maxSpeed / accelerationTIme;
         isgrounded = false;
+
+        gravity = -2f * apexHeight / (apexTIme * apexTIme);
+        initialJumpVelocity = 2f * apexHeight / apexTIme;
+
     }
 
     // Update is called once per frame
@@ -71,15 +82,25 @@ public class PlayerController : MonoBehaviour
 
     private void MovementUpdate(Vector2 playerInput)
     {
+
         Vector2 newVelocity = rb.linearVelocity;
+
+        newVelocity.y += gravity * Time.deltaTime;
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            newVelocity.y = initialJumpVelocity;
+        }
 
         if (playerInput.x != 0f)
         {
             //accelerate
             newVelocity += playerInput * acceleration * Time.deltaTime;
+            rb.linearDamping = 0f;
         } else
         {
             //?
+            rb.linearDamping = friction;
         }
         rb.linearVelocity = newVelocity;
 
