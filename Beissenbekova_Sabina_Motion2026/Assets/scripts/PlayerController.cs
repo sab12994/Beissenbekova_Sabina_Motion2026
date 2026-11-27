@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     float acceleration;
 
     public SpriteRenderer player;
-    public bool isgrounded;
     public LayerMask layerMask;
 
     public float friction;
@@ -21,6 +20,11 @@ public class PlayerController : MonoBehaviour
     public float apexHeight;
     public float apexTIme;
     float initialJumpVelocity;
+
+    public float terminalSpeed;
+
+    public float coyoteTime;
+
 
     public enum FacingDirection
     {
@@ -31,7 +35,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         acceleration = maxSpeed / accelerationTIme;
-        isgrounded = false;
+
 
         gravity = -2f * apexHeight / (apexTIme * apexTIme);
         initialJumpVelocity = 2f * apexHeight / apexTIme;
@@ -71,13 +75,14 @@ public class PlayerController : MonoBehaviour
         //    player.flipX = false;
         //}
 
+
+
+        //if(IsGrounded() == true)
+        //{
+            
+        //}
         
-        if (Physics.Raycast(player.transform.position, - player.transform.up, 1f, layerMask) == false)
-        {
-            IsGrounded();
-            isgrounded = true;
-        }
-        
+
     }
 
     private void MovementUpdate(Vector2 playerInput)
@@ -87,43 +92,72 @@ public class PlayerController : MonoBehaviour
 
         newVelocity.y += gravity * Time.deltaTime;
 
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && IsGrounded() == true)
+        {          
             newVelocity.y = initialJumpVelocity;
+
+            coyoteTime = 0f; //sets the timer to 0 to start counting up again
+
         }
 
         if (playerInput.x != 0f)
         {
             //accelerate
             newVelocity += playerInput * acceleration * Time.deltaTime;
-            rb.linearDamping = 0f;
+           
         } else
         {
-            //?
-            rb.linearDamping = friction;
+            //something
+            
         }
+
+        if (newVelocity.y < -terminalSpeed) // if new velocity is negative it means the player is falling down
+        {
+            newVelocity.y = -terminalSpeed; // sets the deceleration speed to be the same
+        }
+
         rb.linearVelocity = newVelocity;
-
-
+               
 
     }
 
     public bool IsWalking()
-    {
+    {        
+        if (rb.linearVelocity.x < - 0.01f)
+        {
+            return true;
+        }
+        if (rb.linearVelocity.x > 0.01f)
+        {
+            return true;
+        }
         return false;
     }
+
     public bool IsGrounded()
     {
-        return true;
+        if (Physics2D.Raycast(player.transform.position, -player.transform.up, 1f, layerMask))
+        {            
+            return true;            
+        }
+        else
+        {            
+            if (coyoteTime <= 1f) //timer for the double jumping 
+            {
+                coyoteTime += Time.deltaTime;
+                return true;
+            }
+            return false;
+        }  
     }
 
     public FacingDirection GetFacingDirection()
     {
-        if (rb.linearVelocity.x < 0f)
+        if (rb.linearVelocity.x < - 0.01f)
         {
             return FacingDirection.left;
         } 
-        if (rb.linearVelocity.x > 0f)
+        if (rb.linearVelocity.x > 0.01f)
         {
             return FacingDirection.right;
         }
